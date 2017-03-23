@@ -1,11 +1,11 @@
 Package: growbac
 Type: Package
-Title: What the Package Does (Title Case)
+Title: Bacterial Growth Curve Package
 Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Author: Rachel Steele
+Maintainer: Rachel Steele <rsteele7@vols.utk.edu>
+Description: This package will plot bacterial growth curve data measured in single pilot tests or in triplicates. 
+    It also calculates generation times for the bacteria.
+License: CC0
 Encoding: UTF-8
 LazyData: true
