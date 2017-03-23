@@ -5,12 +5,14 @@
 #' @examples
 #'
 data <- read.csv("sample_data.csv")
-singraph <- function(csv, time_col, OD_col) {
+singraph <- function(csv, OD_col) {
+  browser()
   library(ggplot2)
   data <- read.csv(csv)
-  ggplot(data, aes(x=time_col, y=OD_col)) +
-    geom_line() +
-    geom_point() +
+  ggplot(data, aes(x=data$Time, y=data$OD_col)) +
+    geom_line(aes(y=data[, OD_col])) +
+    geom_point(aes(y=data[, OD_col])) +
     ylab(expression(paste("Log ", OD[600], sep = ""))) +
+    scale_y_log10() +
     xlab("Time (min)")
 }
