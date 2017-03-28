@@ -10,6 +10,7 @@
 tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, nm=600) {
   library(ggplot2)
   library(matrixStats)
+  browser()
   data <- read.csv(csv)
   eval_cols <- c(OD_col1, OD_col2, OD_col3)
   data <- mutate(data, mean = rowMeans(data[, eval_cols]),
@@ -22,8 +23,27 @@ tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, nm=600) {
     ylab(bquote("Log " ~ OD[.(nm)])) +
     xlab("Time (min)")
 }
-##Notes to self;
 
-###Might be better to convert to long format as it might be more useful for plotting multiple series
-###To do this, make a column for bacterial strain/condition info and another for replicate info
-###The strain/condition info might be useful for figuring out legends also
+#' Generation time calculation function for triplicate data series
+#' @param csv Filepath to and name of the csv file holding the data.
+#' @param OD_col1 Column holding first column of optical density data.
+#' @param OD_col2 Column holding second column of optical density data.
+#' @param OD_col3 Column holding third column of optical density data.
+#' @param midlog For the strain of interest, the typical midlog value.
+#' @return Generation doubling time in the same unit of time as in the data sheet.
+#' @examples
+#' tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
+
+tripgen <- function(csv, OD_col1, OD_col2, OD_col3, midlog) {
+  data <- read.csv(csv)
+  eval_cols <- c(OD_col1, OD_col2, OD_col3)
+  data <- mutate(data, mean = rowMeans(data[, eval_cols]))
+  log_vals <- data[data[, "mean"] >= midlog, ]
+  use_vals <- head(log_vals, 2)
+  OD_diff <- log10(use_vals[2, "mean"]) - log10(use_vals[1, "mean"])
+  time_diff <- use_vals[2, "Time"] - use_vals[1, "Time"]
+  slope <- OD_diff/time_diff
+  gen_time <- 0.3/slope
+  return(gen_time)
+}
+
