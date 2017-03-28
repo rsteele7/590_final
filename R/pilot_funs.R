@@ -3,19 +3,22 @@
 #' @param csv Filepath to and name of the csv file holding the data.
 #' @param OD_col Column holding optical density data.
 #' @param nm Wavelength at which optical density was measured; default is 600nm
+#' @param time.unit Time unit in which data is collected; default is min
 #' @return Graph with single growth curve.
 #' @examples
 #' singraph("sample_data.csv", "OD600")
 #' singraph("sample_data.csv", "OD600", 300)
 
-singraph <- function(csv, OD_col, nm=600) {
+singraph <- function(csv, OD_col, title = "Growth Curve", nm = 600, time.unit = "min") {
   data <- read.csv(csv)
   ggplot2::ggplot(data, aes(x=data$Time, y=data$OD_col)) +
     geom_line(aes(y=data[, OD_col])) +
     geom_point(aes(y=data[, OD_col])) +
     scale_y_log10() +
     ylab(bquote("Log " ~ OD[.(nm)])) +
-    xlab("Time (min)")
+    xlab(bquote("Time " ~ (.(time.unit)))) +
+    ggtitle(title) +
+    theme(plot.title = element_text(hjust = 0.5))
 }
 
 #' Generation time calculation function

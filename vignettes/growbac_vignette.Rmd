@@ -1,11 +1,50 @@
 ---
-title: "A package for graphing bacterial growth data"
+title: "Growbac: a bacterial growth analysis package"
 author: "Rachel steele"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{A package for graphing bacterial growth data}
+  %\VignetteIndexEntry{"Growbac: a bacterial growth analysis package"}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
+
+##Growbac Introduction
+Bacterial growth curves are an indispensable tool used by many microbiologists to analyze the effects of environmental factors, such as temperature, pH, toxins, and antibiotics on bacterial growth. Growbac utilizes ggplot2, matrixStats, and several base R functionalities to allow for the easy plotting of bacterial growth curves and calculation of bacterial generation (doubling) time. As it was designed as a final project for GEOL590, growbac is installable using the command "devtools::install_github(rsteele7/590_final)". 
+
+In total, growbac contains 4 functions, two of which are used to plot and calculate generation times for growth data not measured in triplicate and two of which are used to do the same for data measured in triplicate. These functions and their uses are described below.
+
+##Growbac Functions
+
+###singraph()
+The first function in this package, singraph(), is a function which can be used to plot growth curve data gathered for only one replicate. The singraph() function has four parameters:
+
+| Parameter   |  Parameter Type     | Information                                                    |
+| ------------|:-------------------:| --------------------------------------------------------------:|
+| csv         |  required           | "filepath/file"                                                |
+| OD.col      |  required           | "column holding OD data"                                       |
+| nm          |  optional           | wavelength at which measurements were taken; default is 600 nm |
+| time.unit   |  optional           | "time unit used in csv time column"; default is min            |
+
+
+The usage of singraph() is demonstrated below:
+
+```{r, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(matrixStats)
+library(growbac)
+singraph("../sample_data.csv", "OD600")
+
+```
+
+
+###singen()
+
+
+###tripgraph()
+
+
+###tripgen()
+
+
 
