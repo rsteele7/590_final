@@ -1,4 +1,5 @@
 #' Triplicate graphing function.
+#'
 #' @param csv Filepath to and name of the csv file holding the data.
 #' @param OD_col1 Column holding first column of optical density data.
 #' @param OD_col2 Column holding second column of optical density data.
@@ -6,11 +7,11 @@
 #' @param nm Wavelength at which optical density was measured; default is 600nm
 #' @examples
 #' tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3")
+#' tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 200)
 
 tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, nm=600) {
   library(ggplot2)
   library(matrixStats)
-  browser()
   data <- read.csv(csv)
   eval_cols <- c(OD_col1, OD_col2, OD_col3)
   data <- mutate(data, mean = rowMeans(data[, eval_cols]),
@@ -24,7 +25,9 @@ tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, nm=600) {
     xlab("Time (min)")
 }
 
+
 #' Generation time calculation function for triplicate data series
+#'
 #' @param csv Filepath to and name of the csv file holding the data.
 #' @param OD_col1 Column holding first column of optical density data.
 #' @param OD_col2 Column holding second column of optical density data.
@@ -32,6 +35,7 @@ tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, nm=600) {
 #' @param midlog For the strain of interest, the typical midlog value.
 #' @return Generation doubling time in the same unit of time as in the data sheet.
 #' @examples
+#' tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
 #' tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
 
 tripgen <- function(csv, OD_col1, OD_col2, OD_col3, midlog) {

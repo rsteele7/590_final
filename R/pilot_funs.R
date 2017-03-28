@@ -1,10 +1,12 @@
 #' Data graphing function.
+#'
 #' @param csv Filepath to and name of the csv file holding the data.
 #' @param OD_col Column holding optical density data.
 #' @param nm Wavelength at which optical density was measured; default is 600nm
 #' @return Graph with single growth curve.
 #' @examples
 #' singraph("sample_data.csv", "OD600")
+#' singraph("sample_data.csv", "OD600", 300)
 
 singraph <- function(csv, OD_col, nm=600) {
   library(ggplot2)
@@ -18,12 +20,14 @@ singraph <- function(csv, OD_col, nm=600) {
 }
 
 #' Generation time calculation function
+#'
 #' @param csv Filepath to and name of the csv file holding the data.
 #' @param OD_col Column holding optical density data.
 #' @param midlog For the strain of interest, the typical midlog value.
 #' @return Generation doubling time in the same unit of time as in the data sheet.
 #' @examples
 #' sindoub("sample_data.csv", "OD600", 0.3)
+#' sindoub("sample_data.csv", "OD600", 0.4)
 
 singen <- function(csv, OD_col, midlog) {
   data <- read.csv(csv)
