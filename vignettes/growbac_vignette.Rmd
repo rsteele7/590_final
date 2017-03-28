@@ -1,0 +1,11 @@
+---
+title: "A package for graphing bacterial growth data"
+author: "Rachel steele"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{A package for graphing bacterial growth data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
