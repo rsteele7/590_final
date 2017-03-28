@@ -9,9 +9,8 @@
 #' singraph("sample_data.csv", "OD600", 300)
 
 singraph <- function(csv, OD_col, nm=600) {
-  library(ggplot2)
   data <- read.csv(csv)
-  ggplot(data, aes(x=data$Time, y=data$OD_col)) +
+  ggplot2::ggplot(data, aes(x=data$Time, y=data$OD_col)) +
     geom_line(aes(y=data[, OD_col])) +
     geom_point(aes(y=data[, OD_col])) +
     scale_y_log10() +

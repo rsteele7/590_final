@@ -10,13 +10,11 @@
 #' tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 200)
 
 tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, nm=600) {
-  library(ggplot2)
-  library(matrixStats)
   data <- read.csv(csv)
   eval_cols <- c(OD_col1, OD_col2, OD_col3)
   data <- mutate(data, mean = rowMeans(data[, eval_cols]),
-                 stdev = rowSds(as.matrix(data[, eval_cols])))
-  ggplot(data, aes(x=data$Time, y=mean)) +
+                 stdev = matrixStats::rowSds(as.matrix(data[, eval_cols])))
+  ggplot2::ggplot(data, aes(x=data$Time, y=mean)) +
     geom_line(aes(y=mean)) +
     geom_point(aes(y=mean)) +
     geom_errorbar(aes(ymin= mean- stdev, ymax = mean + stdev)) +
