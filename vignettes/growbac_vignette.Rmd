@@ -61,7 +61,7 @@ In this equation, $t_{g}$ is the calculated generation time, and this is the val
 
 ####Usage
 ```{r}
-singen("../extdata/sample_data.csv", "OD600", 0.3)
+singen(data_file1, "OD600", 0.3)
 ```
 
 ##tripgraph()
