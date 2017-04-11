@@ -28,7 +28,7 @@ The singraph() function has five parameters:
 | csv         | required           | "filepath/file.csv"                                            |
 | OD.col      | required           | "column holding OD data"                                       |
 | nm          | optional           | wavelength at which measurements were taken; default is 600 nm |
-| time.col    | optional           | "column holding times at which data was collected"             |
+| time.col    | required           | "column holding times at which data was collected"             |
 | time.unit   | optional           | "time unit used in csv time column"; default is min            |
 
 ####Usage
@@ -36,7 +36,7 @@ The singraph() function has five parameters:
 library(ggplot2)
 library(matrixStats)
 library(growbac)
-singraph("../sample_data.csv", "OD600", title="my growth curve title", nm=300, time.unit="hr")
+singraph("../sample_data.csv", "OD600", title="my growth curve title", "Time", nm=300, time.unit="hr")
 ```
 
 ###singen()
