@@ -10,7 +10,7 @@ vignette: >
 ---
 
 ##Introduction
-Bacterial growth curves are an indispensable tool used by many microbiologists to analyze the effects of environmental factors, such as temperature, pH, toxins, and antibiotics on bacterial growth. Growbac utilizes ggplot2, matrixStats, and several base R functionalities to allow for the easy plotting of bacterial growth curves and calculation of bacterial generation (doubling) time. As it was designed as a final project for GEOL590, growbac is installable using the command "devtools::install_github(rsteele7/590_final)".
+Bacterial growth curves are an indispensable tool used by many microbiologists to analyze the effects of environmental factors, including but not limited to temperature, pH, toxins, and antibiotics on bacterial growth. Growbac utilizes ggplot2, matrixStats, and several base R functionalities to allow for the easy plotting of bacterial growth curves and calculation of bacterial generation (doubling) time. As it was designed as a final project for GEOL590, growbac is installable using the command "devtools::install_github(rsteele7/590_final)".
 
 In total, growbac contains 4 functions, two of which are used to plot and calculate generation times for growth data not measured in triplicate and two of which are used to do the same for data measured in triplicate. These functions and their uses are described below.
 
