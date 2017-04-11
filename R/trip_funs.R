@@ -4,6 +4,7 @@
 #' @param OD_col1 Column holding first column of optical density data.
 #' @param OD_col2 Column holding second column of optical density data.
 #' @param OD_col3 Column holding third column of optical density data.
+#' @param title Title of the plot
 #' @param nm Wavelength at which optical density was measured; default is 600nm
 #' @param time.unit Time unit in which data is collected; default is min
 #' @examples
