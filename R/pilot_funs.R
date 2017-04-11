@@ -4,7 +4,7 @@
 #' @param OD.col Column holding optical density data.
 #' @param title The title of the plot
 #' @param nm Wavelength in nanometers at which optical density was measured; default is 600
-#' @param time.col Column holding times at which data was collected, default is "Time"
+#' @param time.col Column holding times at which data was collected
 #' @param time.unit Time unit in which data is collected; default is "min"
 #' @return Graph with single growth curve.
 #' @examples
