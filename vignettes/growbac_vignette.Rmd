@@ -36,7 +36,7 @@ The singraph() function has five parameters:
 library(ggplot2)
 library(matrixStats)
 library(growbac)
-singraph("inst/extdata/sample_data.csv", "OD600", title="my growth curve title", "Time", nm=300, time.unit="hr")
+singraph("../extdata/sample_data.csv", "OD600", title="my growth curve title", "Time", nm=300, time.unit="hr")
 ```
 
 ###singen()
@@ -60,7 +60,7 @@ In this equation, $t_{g}$ is the calculated generation time, and this is the val
 
 ####Usage
 ```{r}
-singen("inst/extdata/sample_data.csv", "OD600", 0.3)
+singen("../extdata/sample_data.csv", "OD600", 0.3)
 ```
 
 ##tripgraph()
