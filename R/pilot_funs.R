@@ -11,7 +11,7 @@
 #' singraph("sample_data.csv", "OD600")
 #' singraph("sample_data.csv", "OD600", 300)
 
-singraph <- function(csv, OD.col, title = "Growth Curve", nm = 600, time.col = "Time", time.unit = "min") {
+singraph <- function(csv, OD.col, title = "Growth Curve", nm = 600, time.col, time.unit = "min") {
   data <- read.csv(csv)
   ggplot2::ggplot(data, aes(x=data$time.col, y=data$OD.col)) +
     geom_line(aes(y=data[, OD.col])) +
