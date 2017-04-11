@@ -36,7 +36,8 @@ The singraph() function has five parameters:
 library(ggplot2)
 library(matrixStats)
 library(growbac)
-singraph("../extdata/sample_data.csv", "OD600", title="my growth curve title", "Time", nm=300, time.unit="hr")
+data_file1 <- system.file("extdata", "sample_data.csv", package="growbac")
+singraph(data_file1, "OD600", title="my growth curve title", "Time", nm=300, time.unit="hr")
 ```
 
 ###singen()
