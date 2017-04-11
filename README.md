@@ -17,6 +17,7 @@ Repo to hold growbac package for 590 final
 
 ##Growbac Installation:
     Without vignette build: devtools::install_github("rsteele7/590_final")
+    
     With vignette build: devtools::install_github("rsteele7/590_final", build_vignettes = TRUE)
   
 ***Installing with vignette is recommended; this makes the vignette accessible through browseVignettes() function.***
