@@ -4,7 +4,8 @@
 \alias{tripgraph}
 \title{Triplicate graphing function.}
 \usage{
-tripgraph(csv, OD_col1, OD_col2, OD_col3, nm = 600)
+tripgraph(csv, OD_col1, OD_col2, OD_col3, time.col = "Time",
+  title = "Growth Curve", nm = 600, time.unit = "min")
 }
 \arguments{
 \item{csv}{Filepath to and name of the csv file holding the data.}
@@ -15,12 +16,18 @@ tripgraph(csv, OD_col1, OD_col2, OD_col3, nm = 600)
 
 \item{OD_col3}{Column holding third column of optical density data.}
 
+\item{time.col}{Column holding times at which data was collected; default is "Time"}
+
+\item{title}{Title of the plot}
+
 \item{nm}{Wavelength at which optical density was measured; default is 600nm}
+
+\item{time.unit}{Time unit in which data is collected; default is min}
 }
 \description{
 Triplicate graphing function.
 }
 \examples{
-tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3")
-tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 200)
+tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", title = "My growth curve in triplicate")
+tripgraph("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", nm = 200)
 }

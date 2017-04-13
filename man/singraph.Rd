@@ -4,14 +4,21 @@
 \alias{singraph}
 \title{Data graphing function.}
 \usage{
-singraph(csv, OD_col, nm = 600)
+singraph(csv, OD.col, time.col = "Time", title = "Growth Curve", nm = 600,
+  time.unit = "min")
 }
 \arguments{
 \item{csv}{Filepath to and name of the csv file holding the data.}
 
-\item{OD_col}{Column holding optical density data.}
+\item{OD.col}{Column holding optical density data.}
 
-\item{nm}{Wavelength at which optical density was measured; default is 600nm}
+\item{time.col}{Column holding times at which data was collected; default is "Time"}
+
+\item{title}{The title of the plot; default is "Growth Curve"}
+
+\item{nm}{Wavelength in nanometers at which optical density was measured; default is 600}
+
+\item{time.unit}{Time unit in which data is collected; default is "min"}
 }
 \value{
 Graph with single growth curve.
@@ -20,6 +27,6 @@ Graph with single growth curve.
 Data graphing function.
 }
 \examples{
-singraph("sample_data.csv", "OD600")
-singraph("sample_data.csv", "OD600", 300)
+singraph("sample_data.csv", time.col = "Time", "OD600")
+singraph("sample_data.csv", "OD600", nm = 300)
 }

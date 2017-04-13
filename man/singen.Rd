@@ -4,14 +4,16 @@
 \alias{singen}
 \title{Generation time calculation function}
 \usage{
-singen(csv, OD_col, midlog)
+singen(csv, OD.col, midlog, time.col = "Time")
 }
 \arguments{
 \item{csv}{Filepath to and name of the csv file holding the data.}
 
-\item{OD_col}{Column holding optical density data.}
+\item{OD.col}{Column holding optical density data.}
 
 \item{midlog}{For the strain of interest, the typical midlog value.}
+
+\item{time.col}{Column holding times at which data was collected; default is "Time"}
 }
 \value{
 Generation doubling time in the same unit of time as in the data sheet.
@@ -20,6 +22,6 @@ Generation doubling time in the same unit of time as in the data sheet.
 Generation time calculation function
 }
 \examples{
-sindoub("sample_data.csv", "OD600", 0.3)
-sindoub("sample_data.csv", "OD600", 0.4)
+singen("sample_data.csv", "OD600", 0.3, time.col = "Time")
+singen("sample_data.csv", "OD600", 0.4)
 }

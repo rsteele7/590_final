@@ -4,7 +4,7 @@
 \alias{tripgen}
 \title{Generation time calculation function for triplicate data series}
 \usage{
-tripgen(csv, OD_col1, OD_col2, OD_col3, midlog)
+tripgen(csv, OD_col1, OD_col2, OD_col3, midlog, time.col = "Time")
 }
 \arguments{
 \item{csv}{Filepath to and name of the csv file holding the data.}
@@ -16,6 +16,8 @@ tripgen(csv, OD_col1, OD_col2, OD_col3, midlog)
 \item{OD_col3}{Column holding third column of optical density data.}
 
 \item{midlog}{For the strain of interest, the typical midlog value.}
+
+\item{time.col}{Column holding times at which data was collected; default is "Time"}
 }
 \value{
 Generation doubling time in the same unit of time as in the data sheet.
@@ -25,5 +27,5 @@ Generation time calculation function for triplicate data series
 }
 \examples{
 tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
-tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
+tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.6)
 }
