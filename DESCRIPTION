@@ -14,5 +14,6 @@ Suggests: testthat,
     knitr,
     rmarkdown
 Imports: ggplot2,
-    matrixStats
+    matrixStats,
+    dplyr
 VignetteBuilder: knitr
