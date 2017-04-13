@@ -8,7 +8,7 @@
 #' @param time.unit Time unit in which data is collected; default is "min"
 #' @return Graph with single growth curve.
 #' @examples
-#' singraph("sample_data.csv", "OD600")
+#' singraph("sample_data.csv", time.col = "Time", "OD600")
 #' singraph("sample_data.csv", "OD600", nm = 300)
 
 singraph <- function(csv, OD.col, time.col = "Time", title = "Growth Curve", nm = 600, time.unit = "min") {
@@ -27,11 +27,11 @@ singraph <- function(csv, OD.col, time.col = "Time", title = "Growth Curve", nm 
 #'
 #' @param csv Filepath to and name of the csv file holding the data.
 #' @param OD.col Column holding optical density data.
-#' @param time.col Column holding times at which data was collected; default is "Time"
 #' @param midlog For the strain of interest, the typical midlog value.
+#' @param time.col Column holding times at which data was collected; default is "Time"
 #' @return Generation doubling time in the same unit of time as in the data sheet.
 #' @examples
-#' singen("sample_data.csv", "OD600", 0.3, time.col = "OD600)
+#' singen("sample_data.csv", "OD600", 0.3, time.col = "Time")
 #' singen("sample_data.csv", "OD600", 0.4)
 
 singen <- function(csv, OD.col, midlog, time.col="Time") {

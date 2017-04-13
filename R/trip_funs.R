@@ -15,7 +15,7 @@
 tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, time.col = "Time", title="Growth Curve", nm=600, time.unit = "min") {
   data <- read.csv(csv)
   eval_cols <- c(OD_col1, OD_col2, OD_col3)
-  data <- mutate(data, mean = rowMeans(data[, eval_cols]),
+  data <- dplyr::mutate(data, mean = rowMeans(data[, eval_cols]),
                  stdev = matrixStats::rowSds(as.matrix(data[, eval_cols])))
   ggplot2::ggplot(data, aes(x=data[, time.col], y=mean)) +
     geom_line(aes(y=mean)) +
@@ -40,12 +40,12 @@ tripgraph <- function(csv, OD_col1, OD_col2, OD_col3, time.col = "Time", title="
 #' @return Generation doubling time in the same unit of time as in the data sheet.
 #' @examples
 #' tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
-#' tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.3)
+#' tripgen("sample_data_trip.csv", "OD600_1", "OD600_2", "OD600_3", 0.6)
 
 tripgen <- function(csv, OD_col1, OD_col2, OD_col3, midlog, time.col = "Time") {
   data <- read.csv(csv)
   eval_cols <- c(OD_col1, OD_col2, OD_col3)
-  data <- mutate(data, mean = rowMeans(data[, eval_cols]))
+  data <- dplyr::mutate(data, mean = rowMeans(data[, eval_cols]))
   log_vals <- data[data[, "mean"] >= midlog, ]
   use_vals <- head(log_vals, 2)
   OD_diff <- log10(use_vals[2, "mean"]) - log10(use_vals[1, "mean"])

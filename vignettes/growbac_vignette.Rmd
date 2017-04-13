@@ -1,6 +1,6 @@
 ---
 title: "Growbac: a bacterial growth analysis package"
-author: "Rachel steele"
+author: "Rachel Steele"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -15,40 +15,60 @@ Bacterial growth curves are an indispensable tool used by many microbiologists t
 In total, growbac contains 4 functions, two of which are used to plot and calculate generation times for growth data not measured in triplicate and two of which are used to do the same for data measured in triplicate. These functions and their uses are described below.
 
 ##Functions
-The four functions included in this package, singraph(), singen(), tripgraph(), and tripgen(), are described below.
+The four functions included in this package, singraph(), singen(), tripgraph(), and tripgen(), are described below. Some of the functions in this package require the use of additional libraries:
+
+* singraph(): ggplot2
+* singen(): no additional packages required
+* tripgraph(): dplyr, matrixStats, ggplot2
+* tripgen(): dplyr
+
+```{r, message=FALSE, warning=FALSE}
+#Loading required libraries
+library(tidyverse)
+library(matrixStats)
+library(growbac)
+```
+
+The sample data files, sample_data.csv and sample_data_trip.csv, used in this vignette are stored in the extdata folder of the installed package.
+
+```{r}
+#Loading sample data files
+data_file1 <- system.file("extdata", "sample_data.csv", package="growbac")
+data_file2 <- system.file("extdata", "sample_data_trip.csv", package="growbac")
+```
 
 ###singraph()
 The first function in this package, singraph(), is a function which can be used to plot growth curve data gathered via collection of optical densities at certain wavelengths for only one replicate. With this function, optical densities are graphed on a log scale against time to generate growth curves. Because the column containing the times at which the optical densities were gathered will generally be named "Time", this assumption is made by the function. If this is not the case, however; the column from which the times are read can be manually manipulated. 
 
 ####Parameters
-The singraph() function has five parameters:
+The singraph() function has six parameters:
 
 | Parameter   | Parameter Type     | Information                                                    |
 | ------------|:------------------:| --------------------------------------------------------------:|
 | csv         | required           | "filepath/file.csv"                                            |
 | OD.col      | required           | "column holding OD data"                                       |
+| time.col    | optional           | "column holding times at which data was collected"             |
+| title       | optional           | The title of the plot; default is "Growth Curve"               |
 | nm          | optional           | wavelength at which measurements were taken; default is 600 nm |
-| time.col    | required           | "column holding times at which data was collected"             |
 | time.unit   | optional           | "time unit used in csv time column"; default is min            |
 
 ####Usage
-```{r, message=FALSE, warning=FALSE}
-library(ggplot2)
-library(matrixStats)
-library(growbac)
-data_file1 <- system.file("extdata", "sample_data.csv", package="growbac")
-singraph(data_file1, "OD600", title="my growth curve title", "Time", nm=300, time.unit="hr")
+```{r}
+singraph(data_file1, "OD600", title="my growth curve title", nm=300, time.unit="hr")
 ```
 
 ###singen()
 The second function in this package, singen(), is a function which can be used to calculate the generation time for bacteria given growth curve data (optical densities at different time points). This function takes the growth curve data in a .csv file and, given the column in which the optical densities are located and the optical density at which the bacteria is in the middle of its logarithmic growth phase, outputs a calculation of the generation time.
 
 ####Parameters
+The singen() function has four parameters:
+
 | Parameter   | Parameter Type     | Information                                        |
 | ------------|:------------------:| --------------------------------------------------:|
 | csv         | required           | "filepath/file.csv"                                |
 | OD.col      | required           | "column holding OD data"                           |
 | midlog      | required           | OD at which the strain of interest is at midlog    |
+| time.col    | optional           | "column holding times at which data was collected" |
 
 ####Equations
 The following equation calculates the slope of the line at mid-log.  
@@ -64,9 +84,44 @@ In this equation, $t_{g}$ is the calculated generation time, and this is the val
 singen(data_file1, "OD600", 0.3)
 ```
 
-##tripgraph()
+###tripgraph()
+The third function of this package, tripgraph() is a function which can be used to graph bacterial growth data in triplicate. Given three columns of optical density data, this function graphs the mean of these data at each time point and the corresponding standard deviation error bars.
 
+####Parameters
+The tripgraph() function has eight parameters:
 
+| Parameter   | Parameter Type     | Information                                                    |
+| ------------|:------------------:| --------------------------------------------------------------:|
+| csv         | required           | "filepath/file.csv"                                            |
+| OD.col1     | required           | "column holding first set of OD data"                          |
+| OD.col2     | required           | "column holding second set of OD data"                         |
+| OD.col3     | required           | "column holding third set of OD data"                          |
+| time.col    | optional           | "column holding times at which data was collected"             |
+| title       | optional           | The title of the plot; default is "Growth Curve"               |
+| nm          | optional           | wavelength at which measurements were taken; default is 600 nm |
+| time.unit   | optional           | "time unit used in csv time column"; default is min            |
 
-##tripgen()
+####Usage
+```{r}
+tripgraph(data_file2, "OD600_1", "OD600_2", "OD600_3", title = "My growth curve in triplicate")
+```
 
+###tripgen()
+The fourth and final function in this package, tripgen(), calculates the generation time for bacterial growth curve data collected in triplicate. This function utilizes the same equations described for the function singen(), with the only difference in that it uses the means of the optical density data rather than individually collected optical densities.
+
+####Parameters
+The tripgen() function has six parameters:
+
+| Parameter   | Parameter Type     | Information                                        |
+| ------------|:------------------:| --------------------------------------------------:|
+| csv         | required           | "filepath/file.csv"                                |
+| OD.col1     | required           | "column holding first set of OD data"              |
+| OD.col2     | required           | "column holding second set of OD data"             |
+| OD.col3     | required           | "column holding third set of OD data"              |
+| midlog      | required           | OD at which the strain of interest is at midlog    |
+| time.col    | optional           | "column holding times at which data was collected" |
+
+####Usage
+```{r}
+tripgen(data_file2, "OD600_1", "OD600_2", "OD600_3", 0.3)
+```
