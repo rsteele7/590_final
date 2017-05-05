@@ -79,15 +79,15 @@ The equation below uses the slope calculated above and the constant 0.3 to calcu
 $$t_{g} = 0.3/K$$
 In this equation, $t_{g}$ is the calculated generation time, and this is the value returned by this function.
 
-####Usage
+#### Usage
 ```{r}
 singen(data_file1, "OD600", 0.3)
 ```
 
-###tripgraph()
+### tripgraph()
 The third function of this package, tripgraph() is a function which can be used to graph bacterial growth data in triplicate. Given three columns of optical density data, this function graphs the mean of these data at each time point and the corresponding standard deviation error bars.
 
-####Parameters
+#### Parameters
 The tripgraph() function has eight parameters:
 
 | Parameter   | Parameter Type     | Information                                                    |
@@ -101,15 +101,15 @@ The tripgraph() function has eight parameters:
 | nm          | optional           | wavelength at which measurements were taken; default is 600 nm |
 | time.unit   | optional           | "time unit used in csv time column"; default is min            |
 
-####Usage
+#### Usage
 ```{r}
 tripgraph(data_file2, "OD600_1", "OD600_2", "OD600_3", title = "My growth curve in triplicate")
 ```
 
-###tripgen()
+### tripgen()
 The fourth and final function in this package, tripgen(), calculates the generation time for bacterial growth curve data collected in triplicate. This function utilizes the same equations described for the function singen(), with the only difference in that it uses the means of the optical density data rather than individually collected optical densities.
 
-####Parameters
+#### Parameters
 The tripgen() function has six parameters:
 
 | Parameter   | Parameter Type     | Information                                        |
@@ -121,7 +121,7 @@ The tripgen() function has six parameters:
 | midlog      | required           | OD at which the strain of interest is at midlog    |
 | time.col    | optional           | "column holding times at which data was collected" |
 
-####Usage
+#### Usage
 ```{r}
 tripgen(data_file2, "OD600_1", "OD600_2", "OD600_3", 0.3)
 ```
